@@ -33,7 +33,7 @@ const reducer = (state, action) => {
     }
 
     case "REMOVE": {
-      return [];
+      return state.filter((v, i) => i !== action.index);
     }
 
     default:
@@ -57,7 +57,9 @@ const Index = () => {
     }
   };
 
-  const deleteInputHandler = (value) => {};
+  const deleteInputHandler = (index) => {
+    dispatch({ type: "REMOVE", index });
+  };
 
   return (
     <div className='TestReduser'>
@@ -73,7 +75,7 @@ const Index = () => {
               ></input>
               {value.title}
               &nbsp;
-              <button onClick={deleteInputHandler}>Delete</button>
+              <button onClick={() => deleteInputHandler(index)}>Delete</button>
             </label>
           </li>
         ))}
